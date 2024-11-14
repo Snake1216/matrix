@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background-rgb: 0, 0, 0;
+}
+
+body {
+  background: rgb(var(--background-rgb));
+  margin: 0;
+  padding: 0;
+}
+
+body, pre, code, input {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+input {
+  background: transparent;
+  border: none;
+  color: inherit;
+}
+
+input:focus {
+  outline: none;
+}
+
+.typing-effect {
+  overflow: hidden;
+  border-right: 2px solid #22c55e;
+  white-space: nowrap;
+  animation: typing 2s steps(40, end),
+             blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #22c55e }
+}
