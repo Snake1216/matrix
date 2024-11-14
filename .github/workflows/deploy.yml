@@ -28,10 +28,11 @@ jobs:
           NEXT_PUBLIC_GEMINI_API_ENDPOINT: ${{ secrets.NEXT_PUBLIC_GEMINI_API_ENDPOINT }}
           NEXT_PUBLIC_GEMINI_API_KEY: ${{ secrets.NEXT_PUBLIC_GEMINI_API_KEY }}
 
-      - name: Add .nojekyll file
+      - name: Prepare static files
         run: |
           touch ./out/.nojekyll
-          cp -r out/_next out/matrix/_next  # 添加这行
+          mkdir -p ./out/matrix
+          cp -r ./out/_next ./out/matrix/_next || true
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
