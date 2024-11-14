@@ -1,25 +1,16 @@
-import type { Metadata } from "next";
-import "./globals.css";
-
-export const metadata: Metadata = {
-  title: "AI Terminal",
-  description: "A terminal-style AI chat interface",
-};
+import './globals.css'
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
       <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap"
-          rel="stylesheet"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body>{children}</body>
+      <body className="bg-black min-h-screen">{children}</body>
     </html>
-  );
+  )
 }
