@@ -4,30 +4,33 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
+          cache: 'npm'
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Install dependencies
+        run: npm ci
 
       - name: Build
         run: npm run build
         env:
-          NEXT_PUBLIC_XAI_API_ENDPOINT: ${{ secrets.NEXT_PUBLIC_XAI_API_ENDPOINT }}
-          NEXT_PUBLIC_XAI_API_KEY: ${{ secrets.NEXT_PUBLIC_XAI_API_KEY }}
+          NEXT_PUBLIC_GEMINI_API_ENDPOINT: ${{ secrets.NEXT_PUBLIC_XAI_API_ENDPOINT }}
+          NEXT_PUBLIC_GEMINI_API_KEY: ${{ secrets.NEXT_PUBLIC_XAI_API_KEY }}
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.5
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages
           folder: out
+          branch: gh-pages
