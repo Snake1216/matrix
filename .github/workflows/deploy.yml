@@ -18,10 +18,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install  # 改用 npm install 而不是 npm ci
+        run: npm install
 
       - name: Build
         run: npm run build
@@ -29,8 +28,14 @@ jobs:
           NEXT_PUBLIC_GEMINI_API_ENDPOINT: ${{ secrets.NEXT_PUBLIC_GEMINI_API_ENDPOINT }}
           NEXT_PUBLIC_GEMINI_API_KEY: ${{ secrets.NEXT_PUBLIC_GEMINI_API_KEY }}
 
+      - name: Add .nojekyll file
+        run: |
+          touch ./out/.nojekyll
+          cp -r out/_next out/matrix/_next  # 添加这行
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: out
           branch: gh-pages
+          clean: true
